@@ -9,16 +9,16 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
-@FeignClient(name = "user-service",url = "http://localhost:8082/users")
+@FeignClient("user-service")
 public interface UserClient {
-    @GetMapping
+    @GetMapping("users")
     List<UserDto> getAllUsers();
-    @GetMapping("{username}")
+    @GetMapping("users/{username}")
     UserDto getUser(@PathVariable("username") String username);
-    @PostMapping()
+    @PostMapping("users")
     UserDto addNewUser(@Valid @RequestBody UserDto userDto);
-    @DeleteMapping("{username}")
+    @DeleteMapping("users/{username}")
     ResponseEntity<Map<String,String>> deleteUser(@PathVariable("username") String username);
-    @PutMapping("{username}")
+    @PutMapping("users/{username}")
     UserDto updateUser(@PathVariable("username") String username,@RequestBody UserDto userDto);
 }

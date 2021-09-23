@@ -9,16 +9,16 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
-@FeignClient(name = "book-service",url = "http://localhost:8081/books")
+@FeignClient("book-service")
 public interface BookClient {
-    @GetMapping
+    @GetMapping("books")
     List<BookDto> getAllBooks();
-    @GetMapping("{book_id}")
+    @GetMapping("books/{book_id}")
     BookDto getBook(@PathVariable("book_id") int book_id);
-    @PostMapping()
+    @PostMapping("books")
     BookDto addNewBook(@Valid @RequestBody BookDto bookDto);
-    @DeleteMapping("{book_id}")
+    @DeleteMapping("books/{book_id}")
     ResponseEntity<Map<String,String>> deleteBook(@PathVariable("book_id") int book_id);
-    @PutMapping("{book_id}")
+    @PutMapping("books/{book_id}")
     BookDto updateBook(@PathVariable("book_id") int book_id,@RequestBody BookDto bookDto);
 }
